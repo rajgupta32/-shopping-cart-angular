@@ -1,0 +1,80 @@
+<div class="mycontent">
+    <!-- <div class="header">
+        <div class="row h-100 header-content">
+            <div class="col-4 col-lg-2 col-md-3 h-100 p-0">
+                <img src="/assets/images/Logo.JPG" alt="LOGO" height="100%" width="100%">
+            </div>
+            <div class="col-8 col-lg-10 col-md-9">
+                <div class="row">
+                    <div id="login" class="col-12 text-end">
+                        <button class="btn btn-clear pt-0 pb-0" [routerLink]="'/Login'">Sign In</button>
+                        <button class="btn btn-clear pt-0 pb-0" [routerLink]="'/Register'">Register</button>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div id="tabs" class="col-9">
+                                <div class="p-3 d-inline cursor-pointer" [routerLink]="'/home'">Home</div>
+                                <div class="p-3 d-inline cursor-pointer" [routerLink]="'/product'">Products</div>
+                            </div>
+                            <div class="col-7 col-lg-3 mt-4 mt-lg-0 offset-5 offset-lg-0">
+                                <button class="btn btn-clear btn-block fs-3" [routerLink]="'/Cart'"><i class="bi-cart-fill cart-color"></i> 0 items</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <ngb-carousel *ngIf="images">
+        <ng-template ngbSlide>
+            <div class="picsum-img-wrapper">
+                <img [src]="images[0]" alt="Random first slide" width="100%" height="500px">
+            </div>
+        </ng-template>
+        <ng-template ngbSlide>
+            <div class="picsum-img-wrapper">
+                <img [src]="images[1]" alt="Random second slide" width="100%" height="500px">
+            </div>
+        </ng-template>
+        <ng-template ngbSlide>
+            <div class="picsum-img-wrapper">
+                <img [src]="images[2]" alt="Random third slide" width="100%" height="500px">
+            </div>
+        </ng-template>
+    </ngb-carousel>
+
+    <div class="products">
+        <div class="product-card prod-box-shadow" *ngFor="let category of categoryList; let i = index">
+            <div class="row h-100">
+                <ng-container [ngTemplateOutlet]="i%2 !== 0 ? detailsTemplate : imageTemplate"
+                    [ngTemplateOutletContext]="{category: category}">
+                </ng-container>
+                <ng-container [ngTemplateOutlet]="i%2 !== 0 ? imageTemplate : detailsTemplate"
+                    [ngTemplateOutletContext]="{category: category}">
+                </ng-container>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<ng-template #imageTemplate let-category='category'>
+    <div class="col-6 col-lg-3 h-100 d-flex justify-content-center">
+        <img [src]="category.imageUrl" alt="Fruits and Vegetables" width="100%" height="100%">
+    </div>
+</ng-template>
+
+<ng-template #detailsTemplate let-category='category'>
+    <div class="col-6 col-lg-9 text-center">
+        <h3>
+            {{category.title}}
+        </h3>
+        <p class="w-50 m-auto multi-truncate">
+            {{category.desc}}
+        </p>
+        <button class="btn default-color mt-2">
+            {{category.buttonTxt}}
+        </button>
+    </div>
+</ng-template>

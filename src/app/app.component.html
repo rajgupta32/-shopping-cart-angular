@@ -1,0 +1,37 @@
+<div class="wv-100 hv-100" [ngClass]="{'overflow-auto': !showCart,'overflow-hidden': showCart}">
+    <div class="header">
+        <div class="row h-100 container">
+            <div class="col-4 col-lg-2 col-md-3 h-100 p-0">
+                <img src="/assets/images/Logo.JPG" alt="LOGO" height="100%" width="100%">
+            </div>
+            <div class="col-8 col-lg-10 col-md-9">
+                <div class="row">
+                    <div id="login" class="col-12 text-end">
+                        <button class="btn btn-clear pt-0 pb-0" [routerLink]="'/Login'">Sign In</button>
+                        <button class="btn btn-clear pt-0 pb-0" [routerLink]="'/Register'">Register</button>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div id="tabs" class="col-9 col-lg-10 col-md-8">
+                                <div class="p-3 d-inline cursor-pointer" [routerLink]="'/home'">Home</div>
+                                <div class="p-3 d-inline cursor-pointer" [routerLink]="'/product'">Products</div>
+                            </div>
+                            <div class="col-lg-2 col-md-4 offset-5 offset-lg-0 offset-md-0">
+                                <button class="btn btn-clear btn-block fs-3" (click)="toggleCart()"><i class="bi-cart-fill cart-color"></i> {{cartItemList.length}} items</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container main-body">
+        <router-outlet></router-outlet>
+    </div>
+    <div class="footer bg-lightgrey mt-3">
+        <div class="container">
+            Copyright &copy; 2011-2021 sabka Bazaar Grocery Supplies Pvt. Ltd.
+        </div>
+    </div>
+</div>
+<app-cart *ngIf="showCart" [showCart]="showCart" (cartAction)="toggleCart()"></app-cart>
