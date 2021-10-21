@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { cloneDeep } from 'lodash';
 import { cartItem } from '../model/cartItem';
 import { CartService } from '../service/cart.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -13,7 +14,11 @@ export class ProductComponent implements OnInit {
   public productList: any[] = [];
   public filteredProductList: any[] = [];
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private _Activatedroute: ActivatedRoute,
+    private _router: Router,
+    private cartService: CartService
+  ) {}
 
   ngOnInit(): void {
     this.categoryList = [
@@ -315,5 +320,6 @@ export class ProductComponent implements OnInit {
     this.filteredProductList = this.productList.filter(
       (item) => item.category === categoryId
     );
+    this._router.navigate(['/product', categoryId]);
   }
 }
