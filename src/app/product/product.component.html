@@ -1,27 +1,39 @@
-<select class="categoryDrpdown form-select default-color" [(ngModel)]="selectedCategory" (ngModelChange)="filterProducts($event);selectedCategory=$event">
-    <option class="catgDrpdownOption" *ngFor="let item of categoryList; let i=index" value="{{item}}">{{item}}</option>
-</select>
 <div class="content-wrapper">
-    <div class="sidebar">
-        <div class="sidebar-item cursor-pointer" *ngFor="let item of categoryList; let i=index" (click)="filterProducts(item)">
-            {{item}}
-        </div>
+  <div class="sidebar">
+    <div
+      class="sidebar-item cursor-pointer"
+      *ngFor="let item of categoryList; let i = index"
+      (click)="filterProducts(item.id)"
+    >
+      {{ item.name }}
     </div>
-    <div class="mycontent">
-        <div class="products">
-            <div *ngFor="let product of filteredProductList; let i=index" class="product-card">
-                <h5 class="productTitle">{{product.title}}</h5>
-                <img src="{{product.imageUrl}}" onerror="this.src='/assets/images/Logo.JPG';" alt="{{product.title}}" height="50%" width="100%">
-                <div class="prod-desc">
-                    {{product.desc}}
-                </div>
-                <div class="w-50 d-inline-block align-bottom">
-                    MRP: Rs.{{product.MRP}}
-                </div>
-                <div class="w-50 d-inline-block text-end">
-                    <button class="btn default-color" (click)="addToCart(product)">Buy Now</button>
-                </div>
-            </div>
+  </div>
+  <div class="mycontent">
+    <div class="products">
+      <div
+        *ngFor="let product of filteredProductList; let i = index"
+        class="product-card"
+      >
+        <h5 class="productTitle">{{ product.title }}</h5>
+        <img
+          src="{{ product.imageUrl }}"
+          onerror="this.src='/assets/images/Logo.JPG';"
+          alt="{{ product.title }}"
+          height="50%"
+          width="100%"
+        />
+        <div class="prod-desc">
+          {{ product.desc }}
         </div>
+        <div class="w-50 d-inline-block align-bottom">
+          MRP: Rs.{{ product.MRP }}
+        </div>
+        <div class="w-50 d-inline-block text-end">
+          <button class="btn default-color" (click)="addToCart(product)">
+            Buy Now
+          </button>
+        </div>
+      </div>
     </div>
+  </div>
 </div>
